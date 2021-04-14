@@ -26,9 +26,9 @@ public void shouldGetMinVolume(){
     radio.getMaxVolume();
     assertEquals(expected, radio.getMaxVolume());
 }
-@Test
-    public void shouldGetAndSetMaxVolume(){
-    radio.setCurrentVolume(10);
-    assertEquals(10, radio.getCurrentVolume());
-}
+//@Test
+//    public void shouldGetAndSetMaxVolume(){
+//    radio.setCurrentVolume(10);
+//    assertEquals(10, radio.getCurrentVolume());
+//}
 }
