@@ -4,13 +4,9 @@ public class Radio {
     private final int minVolume = 0;
     private final int maxVolume = 10;
     private int currentVolume;
-    private boolean plusVolume;
-    private boolean minusVolume;
     private final int minStation = 0;
     private final int maxStation = 9;
     private int currentStation;
-    private boolean prevStation;
-    private boolean nextStation;
     private boolean on;
 
 
@@ -28,14 +24,6 @@ public class Radio {
         return maxVolume;
     }
 
-    public void setPlusVolume(boolean plusVolume) {
-        this.plusVolume = plusVolume;
-    }
-
-    public void setMinusVolume(boolean minusVolume) {
-        this.minusVolume = minusVolume;
-    }
-
     public int getCurrentVolume() {
         return currentVolume;
     }
@@ -47,14 +35,19 @@ public class Radio {
         if (currentVolume < minVolume) {
             currentVolume = minVolume;
         }
-        if (plusVolume) {
+        this.currentVolume = currentVolume;
+    }
+
+    public void setCurrentVolumeUp() {
+        if (currentVolume < maxVolume) {
             currentVolume++;
         }
-        if (minusVolume) {
+    }
+
+    public void setCurrentVolumeDown() {
+        if (currentVolume > minVolume) {
             currentVolume--;
         }
-
-        this.currentVolume = currentVolume;
     }
 
     public int getMinStation() {
@@ -69,14 +62,6 @@ public class Radio {
         return currentStation;
     }
 
-    public void setPrevStation(boolean prevStation) {
-        this.prevStation = prevStation;
-    }
-
-    public void setNextStation(boolean nextStation) {
-        this.nextStation = nextStation;
-    }
-
     public void setCurrentStation(int currentStation) {
         if (currentStation > maxStation) {
             currentStation = minStation;
@@ -84,20 +69,23 @@ public class Radio {
         if (currentStation < minStation) {
             currentStation = maxStation;
         }
-
-        if (nextStation) {
-            currentStation++;
-            if (currentStation > maxStation) {
-                currentStation = minStation;
-            }
-        }
-        if (prevStation) {
-            currentStation--;
-            if (currentStation < minStation) {
-                currentStation = maxStation;
-            }
-        }
         this.currentStation = currentStation;
+    }
+
+    public void setCurrentStationUp() {
+        if (currentStation < maxStation) {
+            currentStation++;
+        } else {
+            currentStation = minStation;
+        }
+    }
+
+    public void setCurrentStationDown() {
+        if (currentStation > minStation) {
+            currentStation--;
+        } else {
+            currentStation = maxStation;
+        }
     }
 
     public boolean isOn() {

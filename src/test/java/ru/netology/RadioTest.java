@@ -14,13 +14,13 @@ class RadioTest {
         assertEquals(10, radio.getMaxVolume());
         assertEquals(0, radio.getMinStation());
         assertEquals(9, radio.getMaxStation());
-        assertFalse( radio.isOn());
+        assertFalse(radio.isOn());
     }
 
     @Test
     public void shouldRadioOn() {
         radio.setOn(true);
-        assertTrue( radio.isOn());
+        assertTrue(radio.isOn());
     }
 
     @Test
@@ -40,36 +40,43 @@ class RadioTest {
     }
 
     @Test
-    public void shouldPlusVolume() {
-        radio.setPlusVolume(true);
+    public void shouldChangeVolume() {
         radio.setCurrentVolume(5);
+        radio.setCurrentVolumeUp();
         assertEquals(6, radio.getCurrentVolume());
+        radio.setCurrentVolumeDown();
+        assertEquals(5, radio.getCurrentVolume());
     }
 
     @Test
-    public void shouldMinusVolume() {
-        radio.setMinusVolume(true);
+    public void shouldChangeStation() {
+        radio.setCurrentStation(7);
+        radio.setCurrentStationUp();
+        assertEquals(8, radio.getCurrentStation());
+        radio.setCurrentStationDown();
+        assertEquals(7, radio.getCurrentStation());
+    }
+
+    @Test
+    public void shouldNotChangeVolumeUp() {
         radio.setCurrentVolume(10);
-        assertEquals(9, radio.getCurrentVolume());
+        radio.setCurrentVolumeUp();
+        assertEquals(10, radio.getCurrentVolume());
     }
 
     @Test
-    public void shouldSwitchToNextStation() {
-        radio.setNextStation(true);
+    public void shouldNotChangeVolumeDown() {
+        radio.setCurrentVolume(0);
+        radio.setCurrentVolumeDown();
+        assertEquals(0, radio.getCurrentVolume());
+    }
+
+    @Test
+    public void shouldChangeBorderStation() {
         radio.setCurrentStation(9);
+        radio.setCurrentStationUp();
         assertEquals(0, radio.getCurrentStation());
-        radio.setNextStation(true);
-        radio.setCurrentStation(8);
+        radio.setCurrentStationDown();
         assertEquals(9, radio.getCurrentStation());
-    }
-
-    @Test
-    public void shouldSwitchToPrevStation() {
-        radio.setPrevStation(true);
-        radio.setCurrentStation(0);
-        assertEquals(9, radio.getCurrentStation());
-        radio.setPrevStation(true);
-        radio.setCurrentStation(5);
-        assertEquals(4, radio.getCurrentStation());
     }
 }
